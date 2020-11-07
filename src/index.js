@@ -1,6 +1,7 @@
 import "./styles/main.css";
 import "swiper/swiper-bundle.css";
 import Swiper from "swiper";
+import v from "./video.mp4";
 
 const swiper = new Swiper(".swiper-container", {
   slidesPerView: 3,
@@ -19,3 +20,7 @@ for (let i = 0; i < shopItems.length; i++) {
     shopItems[i].children[1].classList.add("hidden")
   );
 }
+
+const video = document.getElementById("video");
+
+console.log(v);

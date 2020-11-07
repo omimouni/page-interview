@@ -8,6 +8,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "build"),
+    publicPath: "",
   },
   // Plugins ------
   plugins: [
@@ -25,6 +26,17 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: {
+              attributes: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/,
         use: [
           "style-loader",
@@ -36,6 +48,17 @@ module.exports = {
                 ident: "postcss",
                 plugins: [require("tailwindcss"), require("autoprefixer")],
               },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(mp4|png|jpg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[hash]-[name].[ext]",
             },
           },
         ],
