@@ -1,8 +1,27 @@
+import "./styles/font/font.css";
 import "./styles/main.css";
 import "swiper/swiper-bundle.css";
 import Swiper from "swiper";
 import anime from "animejs/lib/anime.es.js";
-import v from "./video.mp4";
+
+
+const loading = document.getElementsByClassName('loading')[0];
+
+anime({
+  targets: ".loading",
+  bottom: 0,
+  delay: 800,
+  complete: e => loading.innerHTML = "Loading ..."
+});
+
+window.addEventListener('load', e => {
+  anime({
+    targets: loading.parentNode,
+    opacity: 0,
+    delay: 100,
+    complete: e => loading.parentNode.remove()
+  })
+});
 
 const swiper = new Swiper(".swiper-container", {
   slidesPerView: 3,
@@ -13,6 +32,7 @@ const swiper = new Swiper(".swiper-container", {
 const shopItems = document.getElementsByClassName("shop-item");
 
 for (let i = 0; i < shopItems.length; i++) {
+  console.log(i);
   shopItems[i].addEventListener("mouseover", (e) => {
     anime({
       targets: shopItems[i].children[1],
@@ -31,12 +51,12 @@ for (let i = 0; i < shopItems.length; i++) {
 }
 
 const button = document.getElementById("policy-button");
-
 button.addEventListener("click", (e) =>
   anime({
     targets: button.parentNode,
-    scale: 0,
+    opacity: 0,
     delay: 100,
+    complete: e => button.parentElement.remove()
   })
 );
 
@@ -51,29 +71,34 @@ const closeMenu = document.getElementById("close");
 
 openMenu.addEventListener("click", (e) => {
   e.preventDefault();
-  anime({
-    targets: ".menuboard",
+  anime.set('.menuboard', {
     translateX: 0,
-    delay: 200,
-    easing: "easeInElastic(0.5, .6)",
   });
+
+  anime.set('.link', {
+    bottom: 30
+  });
+  anime({
+    targets: '.link',
+    bottom: 0
+  });
+
 });
 
 closeMenu.addEventListener("click", (e) => {
   e.preventDefault();
-  anime({
-    targets: ".menuboard",
-    translateX: "100%",
-    delay: 500,
-    easing: "easeInElastic(1, .3)",
+  anime.set('.menuboard', {
+    translateX: "100%"
   });
+  
 });
 
-const img = document.getElementById('menuCover');
+const img = document.getElementById("menuCover");
 const links = document.getElementsByClassName("link");
 
 for (let i = 0; i < links.length; i++) {
-  links[i].addEventListener("mouseover", e => {
-    img.setAttribute('src',  links[i].getAttribute('data-img') );
+
+  links[i].addEventListener("mouseover", (e) => {
+    img.setAttribute("src", links[i].getAttribute("data-img"));
   });
 }
