@@ -14,13 +14,20 @@ body {
 .text-large {
   font-size: 7em;
 }
-@media only screen and (max-width: 1024px)
-{
+@media only screen and (max-width: 1024px) {
   .text-hero {
-    display: none;
+    font-size: 3em;
   }
 
   .text-large {
     font-size: 2.5em;
+  }
+
+  .hero-screen {
+    min-height: 400px;
+  }
+  .plus {
+    padding-right: 10px;
+    top: -2px;
   }
 }
