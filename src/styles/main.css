@@ -8,17 +8,41 @@ body {
 }
 
 .text-hero {
-  font-size: 10em;
+  font-size: 12vw;
 }
 
 .text-large {
-  font-size: 7em;
+  font-size: 12vw;
 }
-@media only screen and (max-width: 1024px) {
-  .text-hero {
-    font-size: 3em;
-  }
+.plus {
+  padding-right: 10px;
+  top: -10px;
+  font-weight: lighter;
+}
 
+.price-tag {
+  font-size: 3vw;
+}
+
+.hero-screen {
+  min-height: 800px;
+}
+
+.video-screen {
+  min-height: 100vh;
+}
+
+.video-screen #my-video {
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .video-screen {
+    min-height: 400px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
   .text-large {
     font-size: 2.5em;
   }
@@ -26,8 +50,30 @@ body {
   .hero-screen {
     min-height: 400px;
   }
+
+  .video-screen {
+    min-height: 400px;
+  }
+
   .plus {
     padding-right: 10px;
     top: -2px;
   }
+
+  .price-tag {
+    font-size: 7vw;
+  }
+}
+
+.bg-gray-dark {
+  background: #191919;
+}
+
+.link {
+  font-weight: lighter;
+}
+
+.link:hover {
+  border-bottom: solid 2px;
+  border-color: rgba(255, 255, 255, 0.2);
 }

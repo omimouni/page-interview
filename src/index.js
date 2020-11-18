@@ -3,21 +3,27 @@ import "./styles/main.css";
 import "swiper/swiper-bundle.css";
 import Swiper from "swiper";
 import anime from "animejs/lib/anime.es.js";
+import videojs from "video.js";
 
 const loading = document.getElementsByClassName("loading")[0];
 
 anime({
   targets: ".loading",
   bottom: 0,
-  delay: 800,
+  delay: 400,
   complete: (e) => (loading.innerHTML = "Loading ..."),
+});
+
+anime.set(".link", {
+  opacity: 0,
 });
 
 window.addEventListener("load", (e) => {
   anime({
     targets: loading.parentNode,
     opacity: 0,
-    delay: 100,
+    duration: 200,
+    easing: "linear",
     complete: (e) => loading.parentNode.remove(),
   });
 });
@@ -41,6 +47,8 @@ for (let i = 0; i < shopItems.length; i++) {
     anime({
       targets: shopItems[i].children[1],
       translateY: 0,
+      opacity: 1,
+      easing: "spring(.3, 80, 10, 0)",
       // easing: 'spring'
     });
   });
@@ -48,8 +56,8 @@ for (let i = 0; i < shopItems.length; i++) {
   shopItems[i].addEventListener("mouseleave", (e) => {
     anime({
       targets: shopItems[i].children[1],
-      translateY: 300,
-      // easing: 'easeInElastic(, .6)'
+      translateY: 10,
+      opacity: 0,
     });
   });
 }
@@ -61,7 +69,7 @@ for (let i = 0; i < buttons.length; i++) {
       targets: buttons[i].parentNode,
       opacity: 0,
       delay: 100,
-      complete: (e) => button[i].parentElement.remove(),
+      complete: (e) => buttons[i].parentElement.remove(),
     })
   );
 }
@@ -69,7 +77,9 @@ for (let i = 0; i < buttons.length; i++) {
 anime({
   targets: ".up-anime",
   translateY: 0,
+  opacity: 1,
   delay: 500,
+  duration: 1500,
 });
 
 const openMenu = document.getElementById("open");
@@ -81,12 +91,10 @@ openMenu.addEventListener("click", (e) => {
     translateX: 0,
   });
 
-  anime.set(".link", {
-    bottom: 30,
-  });
   anime({
     targets: ".link",
-    bottom: 0,
+    opacity: 1,
+    duration: 2000,
   });
 });
 
@@ -103,5 +111,52 @@ const links = document.getElementsByClassName("link");
 for (let i = 0; i < links.length; i++) {
   links[i].addEventListener("mouseover", (e) => {
     img.setAttribute("src", links[i].getAttribute("data-img"));
+    anime.set(img, {
+      opacity: 0,
+      translateY: 10,
+    });
+
+    anime({
+      targets: img,
+      translateY: 0,
+      opacity: 1,
+      duration: 300,
+      easing: "linear",
+    });
   });
 }
+
+const player = videojs("my-video", {
+  controls: false,
+});
+
+const videoplay = document.getElementById("videoplay");
+
+videoplay.addEventListener("click", (e) => {
+  anime({
+    targets: ".text-hero",
+    translateY: -20,
+    opacity: 0,
+    easing: "spring(.3, 80, 10, 0)",
+  });
+  anime({
+    targets: "#playbtn",
+    opacity: 0,
+    easing: "spring(.3, 80, 10, 0)",
+  });
+  player.play();
+});
+
+player.on("ended", (e) => {
+  anime({
+    targets: ".text-hero",
+    translateY: 0,
+    opacity: 1,
+    easing: "spring(.3, 80, 10, 0)",
+  });
+  anime({
+    targets: "#playbtn",
+    opacity: 1,
+    easing: "spring(.3, 80, 10, 0)",
+  });
+});
