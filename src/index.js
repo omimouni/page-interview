@@ -101,7 +101,7 @@ openMenu.addEventListener("click", (e) => {
 closeMenu.addEventListener("click", (e) => {
   e.preventDefault();
   anime.set(".menuboard", {
-    translateX: "100%",
+    translateX: "200%",
   });
 });
 
